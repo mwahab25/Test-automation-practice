@@ -9,39 +9,26 @@ using Test_automation.Test.TestData;
 using Test_automation.Src;
 using AventStack.ExtentReports;
 
-namespace Test_automation
+namespace Test_automation.Test.Scripts
 {
     
     [TestFixture]
-    public class Tests
+    public class Tests : TestBase
     {
-        private static IWebDriver driver;
-
-        [SetUp]
-        public void Setup()
-        {
-            Log.SetLog(@"./log.txt");
-            Report.SetReport(@"./Report");
-
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://mt-test.ahad.sa/");
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
-        }
 
         [Test]
-        public void Test1()
+        public void Login()
         {
             Log.StartTestCase("Login to system");
             Report.CreateTest("Login", "Login to system");
 
             LoginPage login_page = new LoginPage(driver);
 
-            //for (int i = 0; i < LoginData.username.Length; i++)
-            //{
-                login_page.Login(LoginData.username, LoginData.password);
-            //}
+            string username = ExcelManager.GetCellData(1, 0, "login");
+            string password = ExcelManager.GetCellData(1, 1, "login");
+
+            login_page.Login(username, password);
+
 
             HomePage home_page = new HomePage(driver);
 
@@ -58,14 +45,7 @@ namespace Test_automation
                 Log.Fail("Login test case Failed");
                 Report.Fail("Login test case Failed");
             }
-
-        }
-
-        [TearDown]
-        public void CleanUp()
-        {
-            driver.Close();
-            Report.Flush();
+            ExcelManager.SetCellData("pass",2, 0, "login");
         }
     }
 

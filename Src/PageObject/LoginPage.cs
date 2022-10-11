@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Test_automation.Src.Actions;
 
 namespace Test_automation.Src.PageObject
 {   
@@ -31,24 +32,17 @@ namespace Test_automation.Src.PageObject
 
         public void Login(string username,string password)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            Wait.WaitUntilElementToBeClickable(driver, username_text, "explicit");
+            
+            Element.Type(username_text, username);
 
-            Log.Info("type username");
-            Report.Info("type username");
+            Wait.WaitUntilElementToBeClickable(driver, password_text, "explicit");
 
-            wait.Until(ExpectedConditions.ElementToBeClickable(username_text));      
-            username_text.SendKeys(username);
+            Element.Type(password_text,password);
 
-            Log.Info("type password");
-            Report.Info("type password");
-            wait.Until(ExpectedConditions.ElementToBeClickable(password_text));
-            password_text.SendKeys(password);
+            Wait.WaitUntilElementToBeClickable(driver, login_btn, "fluent");
 
-
-            Log.Info("Click login");
-            Report.Info("Click login");
-            wait.Until(ExpectedConditions.ElementToBeClickable(login_btn));
-            login_btn.Click();
+            Element.Click(login_btn);
         }
 
         public void Login(string[] username, string password)
