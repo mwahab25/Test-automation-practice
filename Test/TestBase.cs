@@ -2,11 +2,9 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Test_automation.Src;
+using Test_automation.Src.Utils;
+using Test_automation.Src.PageObject;
+using Test_automation.Src.Actions;
 
 namespace Test_automation.Test
 {
@@ -26,10 +24,12 @@ namespace Test_automation.Test
         [SetUp]
         public virtual void BeforeEach()
         {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://mt-test.ahad.sa/");
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            Driver.OpenBrowser();
+
+            Pages.Init(driver);
+
+            Log.StartTestCase(TestContext.CurrentContext.Test.Name);
+            Report.CreateTest(TestContext.CurrentContext.Test.Name, TestContext.CurrentContext.Test.FullName);
         }
 
 

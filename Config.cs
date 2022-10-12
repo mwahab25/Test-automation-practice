@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Test_automation
+﻿namespace Test_automation
 {
     public static class Config
     {
         static Config()
         {
             Timeout = 30;
+            Browser = "chrome";
         }
         public static double Timeout { get; set; }
+
+        public static string Browser { get; set; }
     }
 
     

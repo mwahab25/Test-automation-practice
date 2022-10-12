@@ -1,16 +1,9 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Test_automation.Src.Actions;
 
 namespace Test_automation.Src.PageObject
-{   
+{
     public class LoginPage
     {
         private IWebDriver driver;
@@ -34,19 +27,42 @@ namespace Test_automation.Src.PageObject
         {
             Wait.WaitUntilElementToBeClickable(driver, username_text, "explicit");
             
-            Element.Type(username_text, username);
+            Element.Type(username_text, username, "username");
 
             Wait.WaitUntilElementToBeClickable(driver, password_text, "explicit");
 
-            Element.Type(password_text,password);
+            Element.Type(password_text,password, "password");
 
             Wait.WaitUntilElementToBeClickable(driver, login_btn, "fluent");
 
-            Element.Click(login_btn);
+            Element.Click(login_btn,"login");
         }
 
-        public void Login(string[] username, string password)
+        public void TypeUsername(string username)
         {
+            Wait.WaitUntilElementToBeClickable(driver, username_text, "explicit");
+
+            Element.Type(username_text, username,"username");
+        }
+
+        public void Typepassword(string password)
+        {
+
+            Wait.WaitUntilElementToBeClickable(driver, password_text, "explicit");
+
+            Element.Type(password_text, password,"password");
+        }
+
+        public void ClickLogin()
+        {
+            Wait.WaitUntilElementToBeClickable(driver, login_btn, "fluent");
+
+            Element.Click(login_btn,"login");
+        }
+
+        public void Goto(string url)
+        {
+            driver.Navigate().GoToUrl(url);
         }
 
     }

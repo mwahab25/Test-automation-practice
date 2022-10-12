@@ -1,26 +1,22 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Test_automation.Src.Utils;
 
 namespace Test_automation.Src.Actions
 {
     class Element
     {
 
-        public static void Click(IWebElement element)
+        public static void Click(IWebElement element,string elementname)
         {
-            Log.Info($"Click { element.ToString()}");
-            Report.Info($"Click { element.ToString()}");
+            Log.Info($"Click { elementname}");
+            Report.Info($"Click { elementname}");
             
             element.Click();
         }
-        public static void Type(IWebElement element, string text)
+        public static void Type(IWebElement element, string text,string elementname)
         {
-            Log.Info($"Type { text} on element {element.ToString()}");
-            Report.Info($"Type { text} on element {element.ToString()}");
+            Log.Info($"Type { text} on element {elementname}");
+            Report.Info($"Type { text} on element {elementname}");
             element.SendKeys(text);
         }
     }

@@ -2,10 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Test_automation.Src.Utils;
 
 namespace Test_automation.Src.Actions
 {
@@ -28,8 +25,8 @@ namespace Test_automation.Src.Actions
 
         public static void WaitUntilElementToBeClickable(IWebDriver driver,IWebElement locator,string waittype,double? timeout =null)
         {
-            Log.Info($"WaitUntilElementToBeClickable { locator.Text}");
-            Report.Info($"WaitUntilElementToBeClickable { locator.Text}");
+            Log.Info($"WaitUntilElementToBeClickable");
+            Report.Info($"WaitUntilElementToBeClickable");
 
             if (waittype == "explicit")
             {

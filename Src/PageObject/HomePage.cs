@@ -1,12 +1,6 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
-using SeleniumExtras.WaitHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Test_automation.Src.Actions;
 
 namespace Test_automation.Src.PageObject
 {
@@ -23,13 +17,10 @@ namespace Test_automation.Src.PageObject
         [FindsBy(How = How.CssSelector, Using = "h3.kt-subheader__title")]
         private IWebElement title_header;
 
-        public string GetHeaderTitle()
+        public string WaitUntilTitleHeaderVisible()
         {
-           WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
-           wait.Until(ExpectedConditions.ElementToBeClickable(title_header));
-
-           return  title_header.Text;
-
+            Wait.WaitUntilElementToBeClickable(driver, title_header, "fluent");
+            return title_header.Text;
         }
 
     }

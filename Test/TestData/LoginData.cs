@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using Test_automation.Src.Utils;
 
 namespace Test_automation.Test.TestData
 {
@@ -6,14 +6,8 @@ namespace Test_automation.Test.TestData
     {
         static LoginData()
         {
-            List<string> usernames = new List<string>();
-            
-            usernames.Add("Admin");
-            usernames.Add("User1");
-            usernames.Add("User2");
-
-            username = "admin";
-            password = "123qwe";
+            string username = ExcelManager.GetCellData(1, 0, "login");
+            string password = ExcelManager.GetCellData(1, 1, "login");
         }
         public static string username { get; set; }
         public static string password { get; set; }
