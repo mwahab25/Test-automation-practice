@@ -1,20 +1,24 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Edge;
+using OpenQA.Selenium.Firefox;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Test_automation.Src.Utils;
 
 namespace Test_automation.Src.Actions
 {
-    class Driver
+    public class Driver
     {
-        private static IWebDriver driver;
+        public static IWebDriver driver;
+        public static void Init(string browser)
+        {
+            driver = BuildDriver(browser);
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Config.Timeout);
 
+            Log.Info($"open {browser} browser");
+            Report.Info($"open {browser} browser");
+        }
         private static ChromeDriver BuildChromeDriver()
         {
             var options = new ChromeOptions();
@@ -53,19 +57,28 @@ namespace Test_automation.Src.Actions
             }
         }
 
-        public static void OpenBrowser()
-        {
-            driver = BuildDriver(Config.Browser);
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-
-            Log.Info($"Open { Config.Browser}");
-            Report.Info($"Open { Config.Browser}");
-        }
-
         public static void NavigateToUrl(string url)
         {
+            Log.Info($"Navigate to  {url}");
+            Report.Info($"Navigate to  {url}");
             driver.Navigate().GoToUrl(url);
+        }
+
+        public static string GetUrl()
+        {
+            return driver.Url;
+        }
+
+        public static void CloseDriver()
+        {
+            Log.Info($"Close browser");
+            Report.Info($"Close browser");
+            driver.Close();
+        }
+
+        public static void QuitDriver()
+        {
+            driver.Quit();
         }
 
     }

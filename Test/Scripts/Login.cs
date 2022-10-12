@@ -12,12 +12,12 @@ namespace Test_automation.Test.Scripts
         [Test]
         public void Login()
         {
-            Pages.Goto("http://mt-test.ahad.sa/");
+            Pages.Goto("https://mt-test.ahad.sa/Account/Login");
             Pages.LoginPage.TypeUsername(LoginData.username);
             Pages.LoginPage.Typepassword(LoginData.password);
             Pages.LoginPage.ClickLogin();
             Pages.HomePage.WaitUntilTitleHeaderVisible();
-            Assertion.AssertAreEqual(driver.Url, HomeData.url);
+            Assertion.AssertAreEqual(Driver.GetUrl(), HomeData.url);
         }
     }
 

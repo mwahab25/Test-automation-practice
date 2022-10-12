@@ -6,8 +6,8 @@ namespace Test_automation.Test.TestData
     {
         static LoginData()
         {
-            string username = ExcelManager.GetCellData(1, 0, "login");
-            string password = ExcelManager.GetCellData(1, 1, "login");
+            username = ExcelManager.GetCellData(1, 0, "login");
+            password = ExcelManager.GetCellData(1, 1, "login");
         }
         public static string username { get; set; }
         public static string password { get; set; }

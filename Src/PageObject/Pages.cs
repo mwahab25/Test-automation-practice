@@ -5,8 +5,6 @@ namespace Test_automation.Src.PageObject
 {
     public static class Pages
     {
-        private static IWebDriver driver;
-
         public static HomePage HomePage;
         public static LoginPage LoginPage;
 

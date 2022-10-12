@@ -1,18 +1,12 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using Test_automation.Src.Utils;
-using Test_automation.Src.PageObject;
 using Test_automation.Src.Actions;
+using Test_automation.Src.PageObject;
+using Test_automation.Src.Utils;
 
 namespace Test_automation.Test
 {
     public abstract class TestBase
     {
-
-        protected static IWebDriver driver;
-
         [OneTimeSetUp]
         public virtual void BeforeAll()
         {
@@ -24,26 +18,25 @@ namespace Test_automation.Test
         [SetUp]
         public virtual void BeforeEach()
         {
-            Driver.OpenBrowser();
-
-            Pages.Init(driver);
-
             Log.StartTestCase(TestContext.CurrentContext.Test.Name);
             Report.CreateTest(TestContext.CurrentContext.Test.Name, TestContext.CurrentContext.Test.FullName);
+            
+            Driver.Init(Config.Browser);
+            Pages.Init(Driver.driver); 
         }
 
 
         [TearDown]
         public virtual void AfterEach()
         {
-            driver.Close();    
+            Driver.CloseDriver();    
         }
 
 
         [OneTimeTearDown]
         public virtual void AfterAll()
         {
-            driver.Quit();
+            Driver.QuitDriver();
             Report.Flush();
             ExcelManager.SaveCloseExcel();
         }
